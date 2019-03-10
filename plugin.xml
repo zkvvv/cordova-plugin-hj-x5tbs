@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-hj-x5tbs" version="0.0.1">
+    <name>cordova-plugin-hj-x5tbs</name
+    <description>Changes Cordova default WebView to Tencent X5Tbs WebView</description>
+    <license>Apache 2.0</license>
+    <keywords>x5tbs, cordova</keywords>
+    <engines>
+        <engine name="cordova-android" version=">=5"/>
+    </engines>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="X5TbsApplication">
+                <param name="android-package" value="com.hj.x5tbs.X5TbsApplication" />
+            </feature>
+			<preference name="webView" value="com.hj.x5tbs.X5WebViewEngine"/>
+			<allow-navigation href="*" />
+        </config-file>
+		
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        </config-file>
+
+        <source-file src="src/android/src/com/hj/x5tbs/X5CookieManager.java" target-dir="src/com/hj/x5tbs"/>
+        <source-file src="src/android/src/com/hj/x5tbs/X5CordovaClientCertRequest.java" target-dir="src/com/hj/x5tbs"/>
+        <source-file src="src/android/src/com/hj/x5tbs/X5CordovaHttpAuthHandler.java" target-dir="src/com/hj/x5tbs"/>
+        <source-file src="src/android/src/com/hj/x5tbs/X5ExposedJsApi.java" target-dir="src/com/hj/x5tbs"/>
+        <source-file src="src/android/src/com/hj/x5tbs/X5WebChromeClient.java" target-dir="src/com/hj/x5tbs"/>
+        <source-file src="src/android/src/com/hj/x5tbs/X5WebView.java" target-dir="src/com/hj/x5tbs"/>
+        <source-file src="src/android/src/com/hj/x5tbs/X5WebViewClient.java" target-dir="src/com/hj/x5tbs"/>
+        <source-file src="src/android/src/com/hj/x5tbs/X5WebViewEngine.java" target-dir="src/com/hj/x5tbs"/>
+		
+		<source-file src="src/android/com/hj/x5tbs/X5TbsApplication.java" target-dir="src/com/hj/x5tbs"/>
+		
+		<source-file src="src/android/libs/tbs_sdk_thirdapp_v4.3.0.1020_43633_sharewithdownload_withoutGame_obfs_20190111_105200.jar" target-dir="libs"/>
+	    <source-file src="src/android/libs/armeabi/liblbs.so" target-dir="libs/armeabi"/>
+		
+		<hook type="after_plugin_install" src="hooks/after_plugin_install.js" />
+		<hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />
+    </platform>
+    <info>https://github.com/zkvvv/cordova-plugin-hj-x5tbs</info>
+</plugin>
