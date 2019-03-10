@@ -5,7 +5,10 @@ module.exports = function (context) {
         fs = context.requireCordovaModule('fs'),
         pluginDir = context.opts.plugin.dir;
         projectRoot = context.opts.projectRoot;
-
+		ConfigParser = context.requireCordovaModule('cordova-common').ConfigParser,
+        config = new ConfigParser(path.join(context.opts.projectRoot, "config.xml")),
+        packageName = config.android_packageName() || config.packageName();
+		
     if (context.opts.cordova.platforms.indexOf("android") === -1) {
         throw new Error("Android platform has not been added.");
     }

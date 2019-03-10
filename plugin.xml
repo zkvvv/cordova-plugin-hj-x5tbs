@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-hj-x5tbs" version="0.0.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-hj-x5tbs" version="1.0.1">
     <name>cordova-plugin-hj-x5tbs</name>
     <description>Changes Cordova default WebView to Tencent X5Tbs WebView</description>
     <license>Apache 2.0</license>
@@ -9,9 +9,6 @@
     </engines>
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="X5TbsApplication">
-                <param name="android-package" value="com.hj.x5tbs.X5TbsApplication" />
-            </feature>
 			<preference name="webView" value="com.hj.x5tbs.X5WebViewEngine"/>
 			<allow-navigation href="*" />
         </config-file>
@@ -22,6 +19,11 @@
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        </config-file>
+		
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<!--     在AndroidManifest.xml中增加内核首次加载时优化Service声明；    该Service仅在TBS内核首次Dex加载时触发并执行dex2oat任务，任务完成后自动结束。  -->
+			<service android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService" android:label="dexopt" android:process=":dexopt" ></service>
         </config-file>
 
         <source-file src="src/android/src/com/hj/x5tbs/X5CookieManager.java" target-dir="src/com/hj/x5tbs"/>

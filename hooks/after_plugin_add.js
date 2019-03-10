@@ -5,6 +5,9 @@ module.exports = function (context) {
         fs = context.requireCordovaModule('fs'),
         pluginDir = context.opts.plugin.dir,
         projectRoot = context.opts.projectRoot;
+		ConfigParser = context.requireCordovaModule('cordova-common').ConfigParser,
+        config = new ConfigParser(path.join(context.opts.projectRoot, "config.xml")),
+        packageName = config.android_packageName() || config.packageName();
 
     if (context.opts.cordova.platforms.indexOf("android") === -1) {
         throw new Error("Android platform has not been added.");
@@ -39,14 +42,32 @@ module.exports = function (context) {
                 return;
             }
             if (originalApplicationName) {
+				if(originalApplicationName.substr(0, 1) == "."){
+					if (!packageName) {
+						console.error("Package name could not be found!");
+						return ;
+					}
+					originalApplicationName = packageName + originalApplicationName;
+				}else if(originalApplicationName.indexOf(".")==-1){
+					if (!packageName) {
+						console.error("Package name could not be found!");
+						return ;
+					}
+					originalApplicationName = packageName + "." + originalApplicationName;
+				}
                 // found application in AndroidManifest.xml, change it and let our app extends it
                 // 继承
                 fs.readFile(pluginAppFliePath, { encoding: 'utf-8' }, function (err, data) {
                     if (err) {
                         throw new Error('after_plugin_add Unable to find '+appClass+': ' + err);
                     }
-                    data = data.replace(/extends android.app.Application {/gm, `extends ${originalApplicationName} {`);
-                    fs.writeFileSync(AppFliePath, data);
+					if(data.search(/extends\s+android.app.Application/)!=-1){
+						data = data.replace(/extends\s+android.app.Application {/gm, `extends ${originalApplicationName} {`);
+						fs.writeFileSync(AppFliePath, data);
+					}else if(data.search(/extends\s+Application/)!=-1){
+						data = data.replace(/extends\s+Application {/gm, `extends ${originalApplicationName} {`);
+						fs.writeFileSync(AppFliePath, data);
+					}
                 });
                 var updateAppName = matchsAppName[0].replace(/"[^"]*"/, `"${appClass}"`);
                 var updateApp = matchsApp[0].replace(regAppName, updateAppName);
