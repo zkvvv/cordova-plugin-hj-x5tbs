@@ -42,7 +42,7 @@ module.exports = function (context) {
             }
             fs.readFile(AppFliePath, { encoding: 'utf-8' }, function (err, data) {
                 if (err) {
-                    throw new Error('Unable to find '+appClass+': ' + err);
+                    throw new Error('before_plugin_rm Unable to find '+appClass+': ' + err);
                 }
                 originalApplicationName = data.match(/extends [\w$.]+ {/g)[0].split(/ /)[1];
                 if (originalApplicationName === defaultApplicationName) {

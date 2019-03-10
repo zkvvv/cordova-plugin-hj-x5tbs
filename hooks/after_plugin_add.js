@@ -32,7 +32,8 @@ module.exports = function (context) {
                 }
             }
             var filename = 'X5TbsApplication.java';
-            var AppFliePath = path.join(pluginDir, 'src/android/src/com/hj/x5tbs/', filename);
+            var pluginAppFliePath = path.join(pluginDir, 'src/android/src/com/hj/x5tbs/', filename);
+            var AppFliePath = path.join(projectRoot, 'platforms/android/app/src/main/java/com/hj/x5tbs/', filename);
             var appClass = 'com.hj.x5tbs.X5TbsApplication';
             if (originalApplicationName === appClass) {
                 return;
@@ -40,9 +41,9 @@ module.exports = function (context) {
             if (originalApplicationName) {
                 // found application in AndroidManifest.xml, change it and let our app extends it
                 // 继承
-                fs.readFile(AppFliePath, { encoding: 'utf-8' }, function (err, data) {
+                fs.readFile(pluginAppFliePath, { encoding: 'utf-8' }, function (err, data) {
                     if (err) {
-                        throw new Error('before_plugin_install Unable to find '+appClass+': ' + err);
+                        throw new Error('after_plugin_add Unable to find '+appClass+': ' + err);
                     }
                     data = data.replace(/extends android.app.Application {/gm, `extends ${originalApplicationName} {`);
                     fs.writeFileSync(AppFliePath, data);
