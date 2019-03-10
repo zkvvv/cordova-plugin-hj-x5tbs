@@ -42,7 +42,7 @@ module.exports = function (context) {
                 // 继承
                 fs.readFile(AppFliePath, { encoding: 'utf-8' }, function (err, data) {
                     if (err) {
-                        throw new Error('Unable to find '+appClass+': ' + err);
+                        throw new Error('before_plugin_install Unable to find '+appClass+': ' + err);
                     }
                     data = data.replace(/extends android.app.Application {/gm, `extends ${originalApplicationName} {`);
                     fs.writeFileSync(AppFliePath, data);
