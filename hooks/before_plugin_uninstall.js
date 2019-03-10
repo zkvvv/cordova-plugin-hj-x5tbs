@@ -34,9 +34,9 @@ module.exports = function (context) {
                     }
                 }
             }
-            var filename = 'X5TbsAplication.java';
+            var filename = 'X5TbsApplication.java';
             var AppFliePath = path.join(projectRoot, 'platforms/android/app/src/main/java/com/hj/x5tbs/', filename);
-            var appClass = 'com.hj.x5tbs.X5TbsAplication';
+            var appClass = 'com.hj.x5tbs.X5TbsApplication';
             if (!finalApplicationName || (finalApplicationName !== appClass)) {
                 return;
             }

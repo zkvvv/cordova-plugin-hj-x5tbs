@@ -31,10 +31,10 @@ module.exports = function (context) {
                     }
                 }
             }
-            var filename = 'X5TbsAplication.java';
+            var filename = 'X5TbsApplication.java';
             var pluginAppFliePath = path.join(pluginDir, 'src/android/src/com/hj/x5tbs/', filename);
             var AppFliePath = path.join(projectRoot, 'platforms/android/app/src/main/java/com/hj/x5tbs/', filename);
-            var appClass = 'com.hj.x5tbs.X5TbsAplication';
+            var appClass = 'com.hj.x5tbs.X5TbsApplication';
             if (originalApplicationName === appClass) {
                 return;
             }

@@ -7,9 +7,9 @@ import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
 import java.util.HashMap;
 
-public class X5TbsAplication extends Application {
+public class X5TbsApplication extends Application {
 
-    private static final String TAG = "X5TbsAplication";
+    private static final String TAG = "X5TbsApplication";
 
     @Override
     public void attachBaseContext(Context base) {
