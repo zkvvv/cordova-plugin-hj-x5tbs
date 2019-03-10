@@ -13,8 +13,13 @@
     "url": "git+https://github.com/zkvvv/cordova-plugin-hj-x5tbs.git"
   },
   "keywords": [
-    "ecosystem:cordova",
-    "x5tbs"
+    "cordova",
+    "x5tbs",
+    "WebView",
+    "tbs",
+    "x5engine",
+    "cordova-android",
+	"ecosystem:cordova"
   ],
   "author": "zkvvv",
   "license": "Apache 2.0",
